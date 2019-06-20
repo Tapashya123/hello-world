@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<style type="text/css">
+		#player {
+			width: 50px;
+			height: 50px;
+			background-color: red;
+			left: 0px;
+			top: 0px;
+			position: relative;
+			  
+ 
+		}
+		body {
+		   height: 100%;
+		   width: 100%;
+		  
+		}
+	    #first {
+	        width: 300px;
+	        height: 300px;
+	        background: blue;
+	      /*margin-left: 20px;*/
+	         position: absolute;
+
+	       }
+	</style>
+</head>
+<body>
+<div id="first">
+<div id="player"></div>
+</div>
+<script type="text/javascript">
+
+var player;
+var marginleft;
+var margintop;
+var docWidth;
+var docHeight;
+
+function movePlayer(e) {
+  if (e.which==39) {
+  	 // alert(marginleft);
+    if (marginleft >= docWidth) {
+      return;
+    }
+    marginleft +=2;
+    // alert(marginright);
+     // alert(marginleft);
+    player.css('left', marginleft + 'px');
+  }
+  if (e.which==37) {
+    if (marginleft <= 0) {
+      return;
+    }
+    marginleft -=2;
+    player.css('left', marginleft + 'px');
+  }
+  if (e.which==40) {
+    if (margintop >= docHeight) {
+      return;
+    }
+    margintop +=2;
+    player.css('top', margintop + 'px');
+  }
+  if (e.which==38) {
+    if (margintop<=0) {
+      return;
+    }
+    margintop -=2;
+    player.css('top', margintop + 'px');
+  }
+}
+
+
+$(function () {
+  player = $('#player');
+  marginleft = $('#player').offset().left;
+  //marginright = $('#player').offset().right;
+  margintop = $('#player').offset().top;
+  docWidth = $('#first').width() - player.width();
+  docHeight = $('#first').height() - player.height();
+  $(document).on('keydown', function(e) {
+    movePlayer(e);
+  });
+});
+</script>
+</body>
+</html>
